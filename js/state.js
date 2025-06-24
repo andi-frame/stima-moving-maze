@@ -68,7 +68,12 @@ export function initMaze() {
     do {
       x = Math.floor(Math.random() * (COLS - 4)) + 2;
       y = Math.floor(Math.random() * (ROWS - 4)) + 2;
-    } while (maze[y][x] === 1 || (x === start.x && y === start.y) || (x === goal.x && y === goal.y));
+    } while (
+      maze[y][x] === 1 ||
+      (x === start.x && y === start.y) ||
+      (x === goal.x && y === goal.y) ||
+      newObstacles.some((obs) => obs.x === x && obs.y === y)
+    );
 
     newObstacles.push({
       x: x,
