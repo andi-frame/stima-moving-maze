@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathfinding Algorithm Comparison Research</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Pathfinding Algorithm Comparison</h1>
+        <p class="subtitle">Research: A* vs Greedy Best-First vs MCTS pada Maze dengan Dynamic Obstacles</p>
+        <div class="main-content">
+            <div class="game-area">
+                <canvas id="maze" width="600" height="600"></canvas>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #48bb78;"></div>
+                        <span>Start</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ed8936;"></div>
+                        <span>Goal</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #2d3748;"></div>
+                        <span>Wall</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #e53e3e;"></div>
+                        <span>Moving Obstacle</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #3182ce;"></div>
+                        <span>Path</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #805ad5;"></div>
+                        <span>Agent</span>
+                    </div>
+                </div>
+            </div>
+            <div class="controls">
+                <div class="algorithm-selector">
+                    <label>Pilih Algoritma:</label>
+                    <div class="algorithm-buttons">
+                        <div class="algo-btn active" data-algo="astar">A*</div>
+                        <div class="algo-btn" data-algo="greedy">Greedy BFS</div>
+                        <div class="algo-btn" data-algo="mcts">MCTS</div>
+                    </div>
+                </div>
+                <div class="slider-container">
+                    <label>Obstacle Speed: <span id="speedValue">5</span></label>
+                    <input type="range" class="slider" id="obstacleSpeed" min="1" max="10" value="5">
+                </div>
+                <div class="slider-container">
+                    <label>Number of Obstacles: <span id="countValue">20</span></label>
+                    <input type="range" class="slider" id="obstacleCount" min="5" max="100" value="20">
+                </div>
+                <button class="control-btn start-btn" id="startBtn">Start Pathfinding</button>
+                <button class="control-btn reset-btn" id="resetBtn">Reset Maze</button>
+                <button class="control-btn compare-btn" id="compareBtn">Compare All Algorithms</button>
+                <div class="stats">
+                    <h3>Current Statistics</h3>
+                    <div class="stat-item">
+                        <span class="stat-label">Algorithm:</span>
+                        <span class="stat-value" id="currentAlgo">A*</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Path Length:</span>
+                        <span class="stat-value" id="pathLength">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Computation Time:</span>
+                        <span class="stat-value" id="computeTime">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Nodes Explored:</span>
+                        <span class="stat-value" id="nodesExplored">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Success:</span>
+                        <span class="stat-value" id="success">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Replanning Count:</span>
+                        <span class="stat-value" id="replanCount">-</span>
+                    </div>
+                </div>
+                <div id="comparisonResults" class="comparison-results" style="display: none;">
+                    <h3>Comparison Results</h3>
+                    <div id="comparisonContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
