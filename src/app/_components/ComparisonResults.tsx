@@ -1,7 +1,18 @@
 import React from "react";
 
+interface AlgorithmStats {
+  successRate: number;
+  pathLength: number[];
+  computeTime: number[];
+  nodesExplored: number[];
+  replanCount: number[];
+}
+
+type ComparisonData = Record<string, AlgorithmStats>;
+type ComparisonResultsData = ComparisonData | { status: "running" } | null;
+
 interface ComparisonResultsProps {
-  data: any;
+  data: ComparisonResultsData;
   onClose: () => void;
 }
 
@@ -9,9 +20,11 @@ const ComparisonResults: React.FC<ComparisonResultsProps> = ({
   data,
   onClose,
 }) => {
-  if (!data) return null;
+  if (!data) {
+    return null;
+  }
 
-  if (data.status === "running") {
+  if ("status" in data) {
     return (
       <div className="rounded-xl bg-white p-5 shadow-lg">
         <h3 className="mb-4 text-lg font-bold text-gray-800">
@@ -60,6 +73,7 @@ const ComparisonResults: React.FC<ComparisonResultsProps> = ({
           <tbody>
             {algorithms.map((algo) => {
               const algoData = data[algo];
+              if (!algoData) return;
               const avgPathLength =
                 algoData.pathLength.length > 0
                   ? (

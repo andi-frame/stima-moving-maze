@@ -1,8 +1,8 @@
-import {
-  type Position,
-  type PathfindingResult,
-  type Obstacle,
-  type Maze,
+import type {
+  Position,
+  PathfindingResult,
+  Obstacle,
+  Maze,
 } from "@/types/config";
 import { type PathfindingAlgorithm } from "./types";
 import {

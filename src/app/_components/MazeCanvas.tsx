@@ -11,7 +11,7 @@ import {
 } from "@/types/config";
 
 interface MazeCanvasProps {
-  maze: Maze;
+  maze?: Maze;
   start: Position;
   goal: Position;
   obstacles: Obstacle[];
@@ -25,7 +25,7 @@ interface MazeCanvasProps {
 }
 
 const MazeCanvas: React.FC<MazeCanvasProps> = ({
-  maze,
+  maze = [],
   start,
   goal,
   obstacles,
@@ -45,8 +45,9 @@ const MazeCanvas: React.FC<MazeCanvasProps> = ({
     // Draw maze
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let y = 0; y < ROWS; y++) {
+      const row = maze[y] ?? [];
       for (let x = 0; x < COLS; x++) {
-        if (maze[y][x] === 1) {
+        if (row[x] === 1) {
           ctx.fillStyle = "#2d3748";
           ctx.fillRect(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
         }
