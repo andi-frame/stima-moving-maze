@@ -9,7 +9,7 @@ import {
   getNeighbors,
   isObstacle,
   heuristic,
-} from "@/lib/_utils/pathfindingUtils";
+} from "@/lib/utils/pathfindingUtils";
 
 export class AStar implements PathfindingAlgorithm {
   findPath(
