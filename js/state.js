@@ -92,10 +92,9 @@ export function initMaze() {
 
 export function moveObstacles() {
   const speed = parseInt(document.getElementById("obstacleSpeed").value);
-
   for (let obstacle of obstacles) {
     obstacle.moveCounter++;
-    if (obstacle.moveCounter % (6 - speed) === 0) {
+    if (obstacle.moveCounter % (11 - speed) === 0) {
       let newX = obstacle.x + obstacle.dx;
       let newY = obstacle.y + obstacle.dy;
 
