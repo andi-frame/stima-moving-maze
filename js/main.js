@@ -43,18 +43,27 @@ function animate() {
   if (agentBlocked || pathBlocked || state.currentPath.length === 0) {
     state.setReplanningCount(state.replanningCount + 1);
     const result = executeAlgorithm(state.currentAlgorithm, state.agent, state.goal, state.obstacles);
+    state.setLastPathSuccess(result.success);
     state.setCurrentPath(result.path.slice(1));
 
-    updateStats(result);
+    const newTotalTime = state.accumulatedComputeTime + parseFloat(result.computeTime);
+    state.setAccumulatedComputeTime(newTotalTime);
+
+    const newTotalNodes = state.totalNodesExplored + result.explored.length;
+    state.setTotalNodesExplored(newTotalNodes);
+
+    updateStats();
   }
 
   if (state.currentPath.length > 0) {
     const nextStep = state.currentPath.shift();
     state.setAgent({ x: nextStep.x, y: nextStep.y });
+    state.setDistanceTraveled(state.distanceTraveled + 1);
 
     if (state.agent.x === state.goal.x && state.agent.y === state.goal.y) {
       state.setIsRunning(false);
-    //   alert("Goal reached!");
+      updateStats();
+      //   alert("Goal reached!");
       return;
     }
   }
@@ -73,10 +82,16 @@ function startPathfinding() {
   state.setIsRunning(true);
   state.setAgent({ x: state.start.x, y: state.start.y });
   state.setReplanningCount(0);
+  state.setAccumulatedComputeTime(0);
+  state.setDistanceTraveled(0);
+  state.setTotalNodesExplored(0);
 
   const result = executeAlgorithm(state.currentAlgorithm, state.agent, state.goal, state.obstacles);
   state.setCurrentPath(result.path.slice(1));
-  updateStats(result);
+  state.setLastPathSuccess(result.success);
+  state.setAccumulatedComputeTime(state.accumulatedComputeTime + parseFloat(result.computeTime));
+  state.setTotalNodesExplored(state.totalNodesExplored + result.explored.length);
+  updateStats();
 
   animate();
 }
@@ -86,6 +101,9 @@ function resetMaze() {
   if (state.animationId) cancelAnimationFrame(state.animationId);
 
   state.initMaze();
+  state.setAccumulatedComputeTime(0);
+  state.setDistanceTraveled(0);
+  state.setTotalNodesExplored(0);
   draw();
   resetStats();
 }

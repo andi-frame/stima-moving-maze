@@ -10,6 +10,10 @@ export let currentAlgorithm = "astar";
 export let isRunning = false;
 export let animationId;
 export let replanningCount = 0;
+export let accumulatedComputeTime = 0;
+export let distanceTraveled = 0;
+export let totalNodesExplored = 0;
+export let lastPathSuccess = false;
 
 export function setMaze(newMaze) {
   maze = newMaze;
@@ -40,6 +44,18 @@ export function setAnimationId(id) {
 }
 export function setReplanningCount(count) {
   replanningCount = count;
+}
+export function setAccumulatedComputeTime(time) {
+  accumulatedComputeTime = time;
+}
+export function setDistanceTraveled(distance) {
+  distanceTraveled = distance;
+}
+export function setTotalNodesExplored(nodes) {
+  totalNodesExplored = nodes;
+}
+export function setLastPathSuccess(success) {
+  lastPathSuccess = success;
 }
 
 export function initMaze() {

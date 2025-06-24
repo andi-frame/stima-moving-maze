@@ -1,11 +1,11 @@
 import * as state from "./state.js";
 
-export function updateStats(result) {
+export function updateStats() {
   document.getElementById("currentAlgo").textContent = state.currentAlgorithm.toUpperCase();
-  document.getElementById("pathLength").textContent = result.path.length;
-  document.getElementById("computeTime").textContent = result.computeTime + " ms";
-  document.getElementById("nodesExplored").textContent = result.explored.length;
-  document.getElementById("success").textContent = result.success ? "Yes" : "No";
+  document.getElementById("pathLength").textContent = state.distanceTraveled;
+  document.getElementById("computeTime").textContent = state.accumulatedComputeTime.toFixed(2) + " ms";
+  document.getElementById("nodesExplored").textContent = state.totalNodesExplored;
+  document.getElementById("success").textContent = state.lastPathSuccess ? "Yes" : "No";
   document.getElementById("replanCount").textContent = state.replanningCount;
 }
 
