@@ -54,7 +54,7 @@ function animate() {
 
     if (state.agent.x === state.goal.x && state.agent.y === state.goal.y) {
       state.setIsRunning(false);
-      alert("Goal reached!");
+    //   alert("Goal reached!");
       return;
     }
   }
